@@ -7,7 +7,7 @@ vagrantfile-local:
         network:
             private_network: 11.11.11.11
             forwarded_port:
-                C8lJN65nzoTs:
+                g8G65eMVMtYw:
                     host: ''
                     guest: ''
         provider:
@@ -26,10 +26,10 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            tMo4VZFwxGrY:
+            P9E0jk6jEpZk:
                 id: vagrant-root
-                source: ./
-                target: /var/www
+                source: ../
+                target: /var/www/simpleblog
                 nfs: 'true'
         usable_port_range: 2200..2250
     ssh:
@@ -55,10 +55,8 @@ apache:
         - php
         - rewrite
     vhosts:
-        hPgQAqj7sPtq:
+        Fg3x05azguIH:
             servername: simpleblog.dev
-            serveraliases:
-                - www.simpleblog.dev
             docroot: /var/www/simpleblog/public
             port: '80'
             setenv:
@@ -97,5 +95,13 @@ xdebug:
 mysql:
     root_password: password
     phpmyadmin: 0
-    databases: {  }
+    databases:
+        0eTXa1BKw3za:
+            grant:
+                - ALL
+            name: simpleblog
+            host: localhost
+            user: josh
+            password: password
+            sql_file: ''
 
