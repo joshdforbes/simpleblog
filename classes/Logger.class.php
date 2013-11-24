@@ -2,22 +2,11 @@
 
 class Logger 
 {
-	private $logFile;
-
-	function __construct() 
+	public static function log($message)
 	{
-		$this->logFile = '..logs/log_'.date('Ymd').'.txt';
+	    $date = date('d m Y h:i:s'); 
+		$log = $msg."   |  Date:  ".$date."  |  User:  ".$username."\n"; 
+		error_log($log, 3, ERROR_LOG_PATH); 
 	}
-
-	function log($message)
-	{
-		$fp = fopen($this->logFile, 'a+');
-		
-		$message = date('Y m d h:i:s').'\t'.$message.'\n';
-
-		fwrite($fp, $message);
-		fclose($fp);
-	}
-
 
 }
