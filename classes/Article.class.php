@@ -4,21 +4,21 @@ class Article
 {
 	private $connection;
 	private $table = 'articles';
-	private $id;
-	private $author_id;
-	private $date;
-	private $title;
-	private $content;
+	public $id;
+	public $author_id;
+	public $date;
+	public $title;
+	public $content;
 
-	public function __connect(PDO $connection, array $data, $table = 'articles')
+	public function __construct(PDO $connection, array $data, $table = 'articles')
 	{
 		$this->connection = $connection;
 		$this->table = $table;
 		$this->id = isset($data['id']) 
-			? $data['id']
+			? (int) $data['id']
 			: null;
 
-		$this->author_id = $data['author_id'];
+		$this->author_id = (int) $data['author_id'];
 		$this->title = $data['title'];
 		$this->content = $data['content'];
 		$this->date = $data['date'];
@@ -32,7 +32,7 @@ class Article
 			$result->execute();
 
 			return ($result->rowCount() === 1)
-				? $result->fetchAll(PDO::FETCH_ASSOC)
+				? new Article($connection, $result->fetch(PDO::FETCH_ASSOC))
 				: false;
 		} catch (PDOException $e) {
 			Logger::log($e->getMessage());
