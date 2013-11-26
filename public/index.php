@@ -2,5 +2,7 @@
 include '../config.php';
 include '../classes/Logger.class.php';
 include '../classes/DatabaseConnection.class.php';
+include '../classes/Article.class.php';
 
-$dbh = new DatabaseConnection($config);
+$connection = new DatabaseConnection($config);
+var_dump(Article::getById($connection->connection, 1));

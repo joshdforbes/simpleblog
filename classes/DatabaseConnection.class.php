@@ -1,28 +1,28 @@
 <?php
 
-class DatabaseConnection
+class DatabaseConnection extends PDO
 {
-	private $conn;
+	public $connection;
 
 	public function __construct($config)
 	{
 		try {
-			$conn = new PDO('mysql:host='.$config['database']['host'].';dbname='.$config['database']['database'], 
+			$connection = new PDO('mysql:host='.$config['database']['host'].';dbname='.$config['database']['database'], 
 				$config['database']['username'], 
 				$config['database']['password']);
 
-			$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$this->conn = $conn;
-			return $conn;
+			$this->connection = $connection;
+			return $connection;
 		} catch (PDOException $e){
 			Logger::log($e->getMessage());
 		}
 	}
 
-	public function getConn()
+	public function getConnection()
 	{
-		return $conn;
+		return $connection;
 	}
 
 }
