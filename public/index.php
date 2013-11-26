@@ -4,5 +4,5 @@ include '../classes/Logger.class.php';
 include '../classes/DatabaseConnection.class.php';
 include '../classes/Article.class.php';
 
-$connection = new DatabaseConnection($config);
-var_dump(Article::getById($connection->connection, 1));
+$connection = DatabaseConnection::getConnection($config);
+var_dump(Article::getById($connection, 1));
