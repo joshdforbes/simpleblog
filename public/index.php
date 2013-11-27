@@ -6,6 +6,12 @@ include '../classes/Article.class.php';
 
 $connection = DatabaseConnection::getConnection($config);
 $article = Article::getById($connection, 1);
-echo $article->title;
+
+
+$articles = Article::getAll($connection);
+
+foreach ($articles as $article) {
+    echo $article->content."</br>";
+}
 
 

@@ -27,12 +27,12 @@ class Article
 	public static function getById(PDO $connection, $id)
 	{
 		try {
-			$result = $connection->prepare("SELECT * from articles WHERE id = :id LIMIT 1");
-			$result->bindParam(':id', $id);
-			$result->execute();
+			$query = $connection->prepare("SELECT * from articles WHERE id = :id LIMIT 1");
+			$query->bindParam(':id', $id);
+			$query->execute();
 
-			return ($result->rowCount() === 1)
-				? new Article($connection, $result->fetch(PDO::FETCH_ASSOC))
+			return ($query->rowCount() === 1)
+				? new Article($connection, $query->fetch(PDO::FETCH_ASSOC))
 				: false;
 		} catch (PDOException $e) {
 			Logger::log($e->getMessage());
@@ -40,5 +40,28 @@ class Article
 		}
 	}
 
+	public static function getAll(PDO $connection, $orderBy = "date DESC", $startingArticle = 0, $endingArticle = 5)
+	{
+		try {
+			$query = $connection->prepare("SELECT * FROM articles ORDER BY :orderBy LIMIT :startingArticle, :endingArticle");
+			$query->bindParam(':orderBy', $orderBy);
+			$query->bindParam(':startingArticle', $startingArticle, PDO::PARAM_INT);
+			$query->bindParam(':endingArticle', $endingArticle, PDO::PARAM_INT);
+			$query->execute();
+
+			while ($result = $query->fetch(PDO::FETCH_ASSOC) ) {
+      			$article = new Article($connection, $result);
+      			$articles[] = $article;
+    		}
+
+    		return (count($articles) > 1)
+    			? $articles
+    			: false;
+		} catch (PDOException $e) {
+			Logger::log($e->getMessage());
+			return false;
+		}
+
+	}
 
 }
