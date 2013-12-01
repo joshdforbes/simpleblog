@@ -3,7 +3,6 @@
 class Article 
 {
 	private $connection;
-	private $table = 'articles';
 	public $id;
 	public $author_id;
 	public $date;
@@ -13,7 +12,6 @@ class Article
 	public function __construct(PDO $connection, array $data, $table = 'articles')
 	{
 		$this->connection = $connection;
-		$this->table = $table;
 		$this->id = isset($data['id']) 
 			? (int) $data['id']
 			: null;
@@ -61,7 +59,24 @@ class Article
 			Logger::log($e->getMessage());
 			return false;
 		}
+	}
 
+	public function insert()
+	{
+		try {
+			$query = $this->connection->prepare("INSERT INTO articles(author_id, date, title, content) VALUES (:author_id, :date, :title, :content)");
+			$query->bindParam('author_id', $this->author_id);
+			$query->bindParam('date', $this->date);
+			$query->bindParam(':title', $this->title);
+			$query->bindParam(':content', $this->content);
+
+			$this->id=$this->connection->lastInsertId();
+
+			return $query->execute();
+		} catch (PDOException $e) {
+			Logger::log($e->getMessage());
+			return false;
+		}
 	}
 
 }
