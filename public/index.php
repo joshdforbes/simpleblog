@@ -2,25 +2,23 @@
 include '../config.php';
 include '../classes/Logger.class.php';
 include '../classes/DatabaseConnection.class.php';
-include '../classes/Article.class.php';
+include '../model/Model.class.php';
+include '../model/Article.class.php';
 
 $connection = DatabaseConnection::getConnection($config);
-$article = Article::getById($connection, 1);
-
-
-$articles = Article::getAll($connection);
-
-foreach ($articles as $article) {
-    echo $article->content."</br>";
-}
 
 $testArray = array(
     'author_id' => 1,
     'date' => date('Ymd'),
     'title' => 'Another Post',
-    'content' => 'This post is for testing purposes (3)'
+    'content' => 'New Post - Another!'
 );
 
 $newPost = new Article($connection, $testArray);
+$newPost->insert();
 
-echo $newPost->content;
+$articles = Article::findAll($connection);
+
+foreach ($articles as $article) {
+    echo $article->content."</br>";
+}
