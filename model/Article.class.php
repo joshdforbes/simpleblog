@@ -18,7 +18,7 @@ class Article extends Model
 		$this->date = $data['date'];
 	}
 
-	public function insert()
+	public function save()
 	{
 		try {
 			$query = $this->connection->prepare("INSERT INTO ".self::$table."(author_id, date, title, content) VALUES (:author_id, :date, :title, :content)");
@@ -35,6 +35,16 @@ class Article extends Model
 			Logger::log($e->getMessage());
 			return false;
 		}
+	}
+
+	public function update()
+	{
+
+	}
+
+	public function delete()
+	{
+
 	}
 
 }

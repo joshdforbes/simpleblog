@@ -15,7 +15,7 @@ $testArray = array(
 );
 
 $newPost = new Article($connection, $testArray);
-$newPost->insert();
+//$newPost->save();
 
 $articles = Article::findAll($connection);
 

@@ -51,4 +51,10 @@ abstract class Model
 			return false;
 		}
 	}
+
+	public abstract function save();
+
+	public abstract function update();
+
+	public abstract function delete();
 }
