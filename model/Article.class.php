@@ -20,6 +20,10 @@ class Article extends Model
 
 	public function save()
 	{
+		if (!is_null($this->id)) {
+			return $this->update();
+		}
+
 		try {
 			$query = $this->connection->prepare("INSERT INTO ".self::$table."(author_id, date, title, content) VALUES (:author_id, :date, :title, :content)");
 			$query->bindParam(':author_id', $this->author_id);
@@ -39,7 +43,7 @@ class Article extends Model
 
 	public function update()
 	{
-
+		echo "updating";
 	}
 
 	public function delete()

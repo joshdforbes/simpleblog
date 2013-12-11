@@ -8,14 +8,15 @@ include '../model/Article.class.php';
 $connection = DatabaseConnection::getConnection($config);
 
 $testArray = array(
+    'id' => 30,
     'author_id' => 1,
     'date' => date('Ymd'),
     'title' => 'Another Post',
-    'content' => 'New Post - Another!'
+    'content' => 'Test'
 );
 
 $newPost = new Article($connection, $testArray);
-//$newPost->save();
+$newPost->save();
 
 $articles = Article::findAll($connection);
 
