@@ -52,7 +52,16 @@ abstract class Model
 		}
 	}
 
-	public abstract function save();
+	public function save()
+	{
+		if (is_null($this->id)) {
+			$this->insert();
+		} else {
+			$this->update();
+		}
+	}
+
+	public abstract function insert();
 
 	public abstract function update();
 
