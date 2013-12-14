@@ -1,4 +1,7 @@
 <?php
+namespace Simpleblog\Database;
+
+use Simpleblog\Classes\Logger;
 
 class DatabaseConnection
 {
@@ -7,13 +10,13 @@ class DatabaseConnection
 	private function __construct($config)
 	{
 		try {
-			$connection = new PDO('mysql:host='.$config['database']['host'].';dbname='.$config['database']['database'], 
+			$connection = new \PDO('mysql:host='.$config['database']['host'].';dbname='.$config['database']['database'], 
 				$config['database']['username'], 
 				$config['database']['password']);
 
-			$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			self::$connection = $connection;
-		} catch (PDOException $e){
+		} catch (\PDOException $e){
 			Logger::log($e->getMessage());
 		}
 	}

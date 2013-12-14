@@ -1,4 +1,5 @@
 <?php
+namespace Simpleblog\Classes;
 
 class Logger 
 {

@@ -1,11 +1,7 @@
 <?php 
-include '../config.php';
-include '../classes/Logger.class.php';
-include '../classes/DatabaseConnection.class.php';
-include '../model/Model.class.php';
-include '../model/Article.class.php';
+include '../bootstrap.php';
 
-$connection = DatabaseConnection::getConnection($config);
+$connection = \Simpleblog\Database\DatabaseConnection::getConnection($config);
 
 $testArray = array(
     'author_id' => 1,
@@ -14,10 +10,10 @@ $testArray = array(
     'content' => 'Test'
 );
 
-$newPost = new Article($connection, $testArray);
+$newPost = new \Simpleblog\Model\Article($connection, $testArray);
 $newPost->save();
 
-$articles = Article::findAll($connection);
+$articles = \Simpleblog\Model\Article::findAll($connection);
 
 foreach ($articles as $article) {
     echo $article->content."</br>";

@@ -2,3 +2,5 @@
 *.sublime-workspace
 config.php
 .DS_Store
+
+/vendor/

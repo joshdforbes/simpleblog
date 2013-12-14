@@ -1,4 +1,7 @@
 <?php
+namespace Simpleblog\Model;
+
+use Simpleblog\Classes\Logger;
 
 class Article extends Model
 {
@@ -8,7 +11,7 @@ class Article extends Model
 	public $title;
 	public $content;
 
-	public function __construct(PDO $connection, array $data)
+	public function __construct(\PDO $connection, array $data)
 	{
 		parent::__construct($connection, $data);
 
@@ -31,7 +34,7 @@ class Article extends Model
 			$this->id = $this->connection->lastInsertId();
 
 			return true;
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
 			return false;
 		}
