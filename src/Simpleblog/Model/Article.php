@@ -1,11 +1,11 @@
 <?php
 namespace Simpleblog\Model;
-
 use Simpleblog\Classes\Logger;
 
 class Article extends Model
 {
 	protected static $table = 'articles';
+	public $id;
 	public $author_id;
 	public $date;
 	public $title;
@@ -15,6 +15,9 @@ class Article extends Model
 	{
 		parent::__construct($connection, $data);
 
+		if (isset($data['id'])) {
+			$this->id = $data['id'];
+		}
 		$this->author_id = (int) $data['author_id'];
 		$this->title = $data['title'];
 		$this->content = $data['content'];
@@ -42,7 +45,19 @@ class Article extends Model
 
 	public function update()
 	{
-		echo "updating";
+		try {
+			$query = $this->connection->prepare("UPDATE " .self::$table." SET author_id=:author_id, date=:date, title=:title, content=:content WHERE id=:id");
+			$query->bindParam(':id', $this->id);
+			$query->bindParam(':author_id', $this->author_id);
+			$query->bindParam(':date', $this->date);
+			$query->bindParam(':title', $this->title);
+			$query->bindParam(':content', $this->content);
+
+			return $query->execute();
+		} catch (\PDOException $e) {
+			Logger::log($e->getMessage());
+			return false;
+		}
 	}
 
 	public function delete()
