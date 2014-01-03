@@ -46,7 +46,7 @@ class Article extends Model
 	public function update()
 	{
 		try {
-			$query = $this->connection->prepare("UPDATE " .self::$table." SET author_id=:author_id, date=:date, title=:title, content=:content WHERE id=:id");
+			$query = $this->connection->prepare("UPDATE ".self::$table." SET author_id=:author_id, date=:date, title=:title, content=:content WHERE id=:id");
 			$query->bindParam(':id', $this->id);
 			$query->bindParam(':author_id', $this->author_id);
 			$query->bindParam(':date', $this->date);
@@ -62,6 +62,15 @@ class Article extends Model
 
 	public function delete()
 	{
+		try {
+			$query = $this->connection->prepare("DELETE FROM ".self::$table." WHERE id=:id LIMIT 1");
+			$query->bindParam(':id', $this->id);
+
+			return $query->execute();
+		} catch (PDOException $e) {
+			Logger::log($e->getMessage());
+			return false;
+		}
 
 	}
 
