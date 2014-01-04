@@ -5,7 +5,7 @@ use Simpleblog\Classes\Logger;
 class Article extends Model
 {
 	protected static $table = 'articles';
-	public $id;
+	//public $id;
 	public $author_id;
 	public $date;
 	public $title;
@@ -15,9 +15,9 @@ class Article extends Model
 	{
 		parent::__construct($connection, $data);
 
-		if (isset($data['id'])) {
-			$this->id = $data['id'];
-		}
+		//if (isset($data['id'])) {
+		//	$this->id = $data['id'];
+		//}
 		$this->author_id = (int) $data['author_id'];
 		$this->title = $data['title'];
 		$this->content = $data['content'];
@@ -58,20 +58,6 @@ class Article extends Model
 			Logger::log($e->getMessage());
 			return false;
 		}
-	}
-
-	public function delete()
-	{
-		try {
-			$query = $this->connection->prepare("DELETE FROM ".self::$table." WHERE id=:id LIMIT 1");
-			$query->bindParam(':id', $this->id);
-
-			return $query->execute();
-		} catch (PDOException $e) {
-			Logger::log($e->getMessage());
-			return false;
-		}
-
 	}
 
 }

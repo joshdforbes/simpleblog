@@ -68,5 +68,18 @@ abstract class Model
 
 	public abstract function update();
 
-	public abstract function delete();
+	public function delete()
+	{
+		try {
+			$query = $this->connection->prepare("DELETE FROM ".static::$table." WHERE id=:id LIMIT 1");
+			$query->bindParam(':id', $this->id);
+
+			return $query->execute();
+		} catch (PDOException $e) {
+			Logger::log($e->getMessage());
+			return false;
+		}
+
+	}
+
 }
