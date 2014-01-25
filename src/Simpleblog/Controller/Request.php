@@ -4,14 +4,23 @@ namespace Simpleblog\Controller;
 class Request
 {
 	private $uri;
+	private $method;
+	private $get = array();
+	private $post = array();
+	private $cookie = array();
+
 	private $controller;
 	private $action;
 	private $parameters;
-	private $data;
 
-	public function _construct($uri)
+	public function __construct()
 	{
-		$this->uri = $uri;
+		$this->uri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
+		$this->method = isset($_SERVER['REQUEST_METHOD']) ? strtolower($_SERVER['REQUEST_METHOD']) : 'get';
+
+		$this->get = $_GET;
+		$this->post = $_POST;
+		$this->cookie = $_COOKIE;
 	}
 
 	public function getUri()
@@ -49,13 +58,23 @@ class Request
 		$this->parameters = $parameters;
 	}
 
-	public function getData()
+	public function get($name, $default = null)
 	{
-		return $this->data;
+		return isset($this->get[$name]) ? $this->get[$name] : $default;
 	}
 
-	public function setData($data)
+	public function post($name, $default = null)
 	{
-		$this->data = $data;
+		return isset($this->post[$name]) ? $this->post[$name] : $default;
+	}
+
+	public function cookie($name, $default = null)
+	{
+		return isset($this->cookie[$name]) ? $this->cookie[$name] : $default;
+	}
+
+	public function getMethod()
+	{
+		return $this->method;
 	}
 }

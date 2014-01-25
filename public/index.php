@@ -1,7 +1,8 @@
 <?php 
 include '../bootstrap.php';
 
-$router = new \Simpleblog\Controller\FrontController($_SERVER['REQUEST_URI']);
+$request = new \Simpleblog\Controller\Request();
+$router = new \Simpleblog\Controller\Router($request);
 ?>
 
 <form action="/posts/create" method="post">

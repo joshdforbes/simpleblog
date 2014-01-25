@@ -16,11 +16,6 @@ $testArray = array(
 $newPost = new Simpleblog\Model\Article($connection, $testArray);
 $newPost->save();
 
-$articles = Simpleblog\Model\Article::findAll($connection, 'date DESC', 0, 100);
-
-foreach ($articles as $article) {
-    echo $article->content."</br>";
-}
 
 
 
