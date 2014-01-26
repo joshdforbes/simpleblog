@@ -36,6 +36,7 @@ class Request
 	public function setController($controller)
 	{
 		$this->controller = $controller;
+		return $this;
 	}
 
 	public function getAction()
@@ -46,6 +47,7 @@ class Request
 	public function setAction($action)
 	{
 		$this->action = $action;
+		return $this;
 	}
 
 	public function getParameters()
@@ -56,6 +58,7 @@ class Request
 	public function setParameters($parameters)
 	{
 		$this->parameters = $parameters;
+		return $this;
 	}
 
 	public function get($name, $default = null)

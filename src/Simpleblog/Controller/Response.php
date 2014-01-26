@@ -19,6 +19,25 @@ class Response
 		$this->headers = $headers;
 	}
 
+	public function setContent($content)
+	{
+		$this->content = $content;
+		return $this;
+	}
+
+	public function setStatus($status)
+	{
+		$this->$status = $status;
+		return $this;
+	}
+
+	public function addHeader($header)
+	{
+		$this->headers[] = $header;	
+		return $this;
+	}
+
+
 	public function send()
 	{
 		header('Status: ' . isset(static::$statusCodes[$this->status]) ? static::$statusCodes[$this->status] : $this->status);
