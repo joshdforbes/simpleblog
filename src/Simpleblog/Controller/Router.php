@@ -16,8 +16,8 @@ class Router
 		$request = explode('/', trim($this->request->getUri(), '/'));
 		$request = preg_replace('/[^0-9a-zA-Z]/', '', $request);
 
-		$this->controller = isset($request[0]) ? array_shift($request) : 'HomeController';
-		$this->action = isset($request[0]) ? array_shift($request) : 'default';
+		$this->controller = isset($request[0]) ? array_shift($request) : '';
+		$this->action = isset($request[0]) ? array_shift($request) : '';
 		$this->parameters = isset($request[0]) ? $request : array();
 	}
 
