@@ -7,17 +7,24 @@ class Router
 
 	public function __construct(Request $request)
 	{
-		$this->request = $request->getUri();
+		$this->request = $request;
 		$this->parseRequest();
 	}
 
 	public function parseRequest()
 	{
-		$request = explode('/', trim($this->request, '/'));
+		$request = explode('/', trim($this->request->getUri(), '/'));
 		$request = preg_replace('/[^0-9a-zA-Z]/', '', $request);
 
-		$controller = isset($request[0]) ? array_shift($request) : 'HomeController';
-		$action = isset($request[0]) ? array_shift($request) : 'default';
-		$parameters = isset($request[0]) ? $request : array();
+		$this->controller = isset($request[0]) ? array_shift($request) : 'HomeController';
+		$this->action = isset($request[0]) ? array_shift($request) : 'default';
+		$this->parameters = isset($request[0]) ? $request : array();
+	}
+
+	public function route()
+	{
+		$this->request->setController($this->controller)
+			->setAction($this->action)
+			->setParameters($this->parameters);
 	}
 }
