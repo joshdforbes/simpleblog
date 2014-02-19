@@ -18,6 +18,12 @@ class PostsController
 	{
 		$articles = Article::findAll($this->connection);
 		print_r($articles);
+	}
+
+	public function articleAction($id)
+	{
+		$article = Article::find($this->connection, $id);
+		print_r($article);
 
 	}
 
