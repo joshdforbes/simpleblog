@@ -2,9 +2,9 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\Article as Article;
-//include 'config.php';
 
-class PostsController
+
+class ArticlesController
 {
 	private $connection;
 

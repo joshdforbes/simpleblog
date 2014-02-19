@@ -7,7 +7,7 @@ class ErrorController
 
 	public function notFoundAction($parameters)
 	{
-		echo 'Not Found!';
+		echo $parameters;
 		return $this;
 	}
 }
