@@ -3,9 +3,7 @@ namespace Simpleblog\Controller;
 
 class ErrorController
 {
-	public function __construct()
-	{
-	}
+	public function __construct(){}
 
 	public function notFoundAction($parameters)
 	{

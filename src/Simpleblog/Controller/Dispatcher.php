@@ -4,10 +4,12 @@ namespace Simpleblog\Controller;
 class Dispatcher
 {
 	private $request;
+	private $connection;
 
-	public function __construct(Request $request)
+	public function __construct(Request $request, \PDO $connection)
 	{
 		$this->request = $request;
+		$this->connection = $connection;
 		try {
 			$this->setController();
 			$this->setAction();
@@ -47,7 +49,7 @@ class Dispatcher
 
 	public function dispatch()
 	{
-		call_user_func_array(array(new $this->controller, $this->action), $this->parameters);
+		call_user_func_array(array(new $this->controller($this->connection), $this->action), $this->parameters);
 	}
 
 
