@@ -49,7 +49,7 @@ class Dispatcher
 
 	public function dispatch()
 	{
-		call_user_func_array(array(new $this->controller($this->connection), $this->action), $this->parameters);
+		call_user_func_array(array(new $this->controller($this->request, $this->connection), $this->action), $this->parameters);
 	}
 
 
