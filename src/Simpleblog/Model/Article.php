@@ -5,7 +5,6 @@ use Simpleblog\Classes\Logger;
 class Article extends Model
 {
 	protected static $table = 'articles';
-	//public $id;
 	public $author_id;
 	public $date;
 	public $title;
@@ -15,9 +14,6 @@ class Article extends Model
 	{
 		parent::__construct($connection, $data);
 
-		//if (isset($data['id'])) {
-		//	$this->id = $data['id'];
-		//}
 		$this->author_id = (int) $data['author_id'];
 		$this->title = $data['title'];
 		$this->content = $data['content'];

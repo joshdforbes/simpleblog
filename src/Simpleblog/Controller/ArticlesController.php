@@ -2,6 +2,7 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\Article as Article;
+use Simpleblog\View\View as View;
 
 
 class ArticlesController
@@ -18,14 +19,19 @@ class ArticlesController
 	public function indexAction()
 	{
 		$articles = Article::findAll($this->connection);
-		print_r($articles);
+		
+		$view = new View('articles.php');
+		$view->set('articles', $articles);
+		$view->set('title', 'test page');
+		$response = new Response;
+		$response->setContent($view->render());
+		$response->send();
 	}
 
 	public function articleAction($id)
 	{
 		$article = Article::find($this->connection, $id);
 		print_r($article);
-
 	}
 
 }

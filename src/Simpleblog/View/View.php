@@ -4,10 +4,16 @@ namespace Simpleblog\View;
 
 class View
 {
-	public function __construct($template, $data)
+	public $data = array();
+
+	public function __construct($template)
 	{
 		$this->template = $template;
-		$this->data = $data;
+	}
+
+	public function set($name, $value)
+	{
+		$this->data[$name]=$value;
 	}
 
 	public function render() {

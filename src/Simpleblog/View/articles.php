@@ -1,12 +1,12 @@
 <html>
 <head>
 	<title>
-		Test Article View
+		<?php echo $this->data['title']; ?>
 	</title>
 </head>
 <body>
 	
-<?php foreach($this->data as $article): ?>
+<?php foreach($this->data['articles'] as $article): ?>
 	<h1><?php echo $article->title; ?></h1>
     <h5><?php echo $article->date; ?></h5>
     <p><?php echo $article->content; ?></p>
