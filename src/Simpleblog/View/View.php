@@ -13,7 +13,7 @@ class View
 
 	public function set($name, $value)
 	{
-		$this->data[$name]=$value;
+		$this->data[$name] = $value;
 	}
 
 	public function render() {

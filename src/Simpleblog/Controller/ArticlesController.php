@@ -31,7 +31,13 @@ class ArticlesController
 	public function articleAction($id)
 	{
 		$article = Article::find($this->connection, $id);
-		print_r($article);
+		
+		$view = new View('article.php');
+		$view->set('article', $article);
+		$view->set('title', 'test2');
+		$response = new Response;
+		$response->setContent($view->render());
+		$response->send();
 	}
 
 }
