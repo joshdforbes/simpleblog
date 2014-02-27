@@ -2,30 +2,23 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\Article as Article;
-use Simpleblog\View\View as View;
 
 
-class ArticlesController
+class ArticlesController extends BaseController
 {
-	private $request;
-	private $connection;
-
 	public function __construct(Request $request, \PDO $connection)
 	{
-		$this->request = $request;
-		$this->connection = $connection;
+		parent::__construct($request, $connection);		
 	}
 
 	public function indexAction()
 	{
 		$articles = Article::findAll($this->connection);
 		
-		$view = new View('articles.php');
-		$view->set('articles', $articles);
-		$view->set('title', 'test page');
-		$response = new Response;
-		$response->setContent($view->render());
-		$response->send();
+		$this->view->set('articles', $articles);
+		$this->view->set('title', 'test page');
+		$this->response->setContent($this->view->render('articles.php'));
+		$this->response->send();
 	}
 
 	public function articleAction($id)
