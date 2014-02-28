@@ -2,15 +2,28 @@
 include 'config.php';
 require 'vendor/autoload.php';
 
+define('PATH_ROOT', dirname(__FILE__));
+
 $connection = Simpleblog\Database\DatabaseConnection::getConnection($config);
 
 $request = new Simpleblog\Controller\Request;
 
 $router = new Simpleblog\Controller\Router($request);
 $router->route();
-
 $dispatcher = new Simpleblog\Controller\Dispatcher($request, $connection);
-$dispatcher->dispatch();
+
+try {
+	$dispatcher->route();
+	$dispatcher->dispatch();
+} catch (\Exception $e) {
+	$dispatcher->setController('error');
+	$dispatcher->setAction('notFound');
+	$dispatcher->setParameters((array)$e);
+	$dispatcher->dispatch();
+}	
+
+
+
 
 
 

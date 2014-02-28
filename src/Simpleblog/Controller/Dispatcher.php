@@ -9,21 +9,14 @@ class Dispatcher
 	public function __construct(Request $request, \PDO $connection)
 	{
 		$this->request = $request;
-		$this->connection = $connection;
-		try {
-			$this->setController();
-			$this->setAction();
-			$this->setParameters();
-		} catch (\Exception $e) {
-			$this->controller = __NAMESPACE__ . '\\' . 'ErrorController';
-			$this->action = 'notFoundAction';
-			$this->parameters = (array)$e;
-		}		
+		$this->connection = $connection;	
 	}
 
-	public function setController()
+	public function setController($controller = null)
 	{
-		$controller = ucfirst(strtolower($this->request->getController())) . 'Controller';
+		$controller = ($controller === null) ? $this->request->getController() : $controller;
+		
+		$controller = ucfirst(strtolower($controller)) . 'Controller';
 		$controller = __NAMESPACE__ . '\\' . $controller;
 		if (class_exists($controller)) {
 			$this->controller = $controller;
@@ -32,9 +25,14 @@ class Dispatcher
 		Throw new \Exception('Controller not found');
 	}
 
-	public function setAction()
+	public function setAction($action = null)
 	{
-		$action = strtolower($this->request->getAction()) . 'Action';
+		if ($action === null) {
+			$action = strtolower($this->request->getAction()) . 'Action';
+		} else {
+			$action = strtolower($action) . 'Action';
+		}
+		
 		if (method_exists($this->controller, $action)) {
 			$this->action = $action;
 			return $this;
@@ -42,9 +40,20 @@ class Dispatcher
 		Throw new \Exception('Action not found');
 	}
 
-	public function setParameters()
+	public function setParameters($parameters = null)
 	{
-		$this->parameters = $this->request->getParameters();
+		if ($parameters === null) {
+			$this->parameters = $this->request->getParameters();
+		} else {
+			$this->parameters = $parameters;
+		}
+	}
+
+	public function route()
+	{
+		$this->setController();
+		$this->setAction();
+		$this->setParameters();
 	}
 
 	public function dispatch()
