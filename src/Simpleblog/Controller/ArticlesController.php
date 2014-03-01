@@ -26,12 +26,11 @@ class ArticlesController extends BaseController
 	{
 		$article = Article::find($this->connection, $id);
 		
-		$view = new View('article.php');
-		$view->set('article', $article);
-		$view->set('title', 'test2');
-		$response = new Response;
-		$response->setContent($view->render());
-		$response->send();
+		$this->view->set('article', $article);
+		$this->view->set('title', 'test 2');
+		$content = $this->view->render('article.php');
+		$this->response->setContent($content);
+		$this->response->send();
 	}
 
 }
