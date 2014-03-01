@@ -7,9 +7,10 @@
 <body>
 	
 <?php foreach($this->data['articles'] as $article): ?>
-	<h1><?php echo $article->title; ?></h1>
-    <h5><?php echo $article->date; ?></h5>
-    <p><?php echo $article->content; ?></p>
+	<h1><a href="articles/article/<?= $article->id; ?>"> <?= $article->title; ?> </a></h1>
+	
+    <h5><?= $article->date; ?></h5>
+    <p><?= $article->content; ?></p>
 <?php endforeach; ?>
 
 

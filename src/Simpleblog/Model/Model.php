@@ -6,7 +6,7 @@ use Simpleblog\Classes\Logger;
 abstract class Model
 {
 	protected $connection;
-	protected $id;
+	public $id;
 
 	public function __construct(\PDO $connection, array $data)
 	{
