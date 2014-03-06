@@ -5,11 +5,10 @@ CREATE TABLE articles
   	date DATE NOT NULL,                       
   	title VARCHAR(255) NOT NULL,                                                
   	content TEXT NOT NULL,                       
-
   	PRIMARY KEY (id),
   	FOREIGN KEY (author_id)
   		REFERENCES authors(id)
-  		ON DELETE CASCADE
+  		ON DELETE CASCADE,
 ) ENGINE=INNODB;
 
 CREATE TABLE authors

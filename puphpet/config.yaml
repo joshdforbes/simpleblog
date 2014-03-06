@@ -1,34 +1,34 @@
 ---
 vagrantfile-local:
     vm:
-        box: ubuntu-precise12042-x64-vbox4210
-        box_url: 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box'
+        box: ubuntu-precise12042-x64-vbox43
+        box_url: 'http://box.puphpet.com/ubuntu-precise12042-x64-vbox43.box'
         hostname: null
         network:
             private_network: 11.11.11.11
             forwarded_port:
-                g8G65eMVMtYw:
+                0qMAFlXGsw99:
                     host: ''
                     guest: ''
         provider:
             virtualbox:
                 modifyvm:
-                    name: simpleblog-vm
                     natdnshostresolver1: on
                     memory: '512'
                 setextradata:
                     VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root: 1
         provision:
             puppet:
-                manifests_path: puppet/manifests
+                manifests_path: puphpet/puppet
+                manifest_file: manifest.pp
                 options:
-                    - --verbose
-                    - '--hiera_config /vagrant/hiera.yaml'
+                    - '--verbose'
+                    - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            P9E0jk6jEpZk:
+            1eUcWocXXiV1:
                 id: vagrant-root
-                source: ../
+                source: ./
                 target: /var/www/simpleblog
                 nfs: 'true'
         usable_port_range: 2200..2250
@@ -43,19 +43,36 @@ vagrantfile-local:
         forward_x11: false
         shell: 'bash -l'
     vagrant:
-        host: ':detect'
+        host: detect
 server:
     packages: {  }
     dot_files:
         -
             bash_aliases: null
     _prevent_empty: ''
+mailcatcher:
+    install: 0
+    settings:
+        smtp_ip: 0.0.0.0
+        smtp_port: 1025
+        http_ip: 0.0.0.0
+        http_port: '1080'
+        mailcatcher_path: /usr/local/bin
+        log_path: /var/log/mailcatcher/mailcatcher.log
 apache:
+    install: '1'
+    settings:
+        user: www-data
+        group: www-data
+        default_vhost: true
+        manage_user: false
+        manage_group: false
+        sendfile: 0
     modules:
         - php
         - rewrite
     vhosts:
-        Fg3x05azguIH:
+        GnEPahtedU5l:
             servername: simpleblog.dev
             docroot: /var/www/simpleblog/public
             port: '80'
@@ -63,11 +80,11 @@ apache:
                 - 'APP_ENV dev'
             override:
                 - All
-    user: www-data
-    group: www-data
-    default_vhost: true
-    mpm_module: prefork
+            custom_fragment: ''
+    mod_pagespeed: 0
+    mod_spdy: 0
 php:
+    install: '1'
     version: '54'
     composer: '1'
     modules:
@@ -92,11 +109,17 @@ xdebug:
         xdebug.remote_enable: '1'
         xdebug.remote_handler: dbgp
         xdebug.remote_port: '9000'
+drush:
+    install: 0
+    settings:
+        drush.tag_branch: 6.x
 mysql:
+    install: '1'
     root_password: password
     phpmyadmin: 0
+    adminer: 0
     databases:
-        0eTXa1BKw3za:
+        tnWbAeIT06KG:
             grant:
                 - ALL
             name: simpleblog
@@ -104,4 +127,30 @@ mysql:
             user: josh
             password: password
             sql_file: ''
+mongodb:
+    install: 0
+    settings:
+        auth: 1
+        port: '27017'
+    databases: {  }
+redis:
+    install: 0
+    settings:
+        conf_port: '6379'
+beanstalkd:
+    install: 0
+    settings:
+        listenaddress: 0.0.0.0
+        listenport: '13000'
+        maxjobsize: '65535'
+        maxconnections: '1024'
+        binlogdir: /var/lib/beanstalkd/binlog
+        binlogfsync: null
+        binlogsize: '10485760'
+    beanstalk_console: 0
+    binlogdir: /var/lib/beanstalkd/binlog
+rabbitmq:
+    install: 0
+    settings:
+        port: '5672'
 
