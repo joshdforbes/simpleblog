@@ -24,11 +24,20 @@ class AdminController extends BaseController
 
 	public function insertArticleAction()
 	{
-		print_r($_POST);
-
 		$article = new Article($this->connection, $_POST);
 		$article->insert();
 
-		$this->indexAction();
+		$this->response->addHeader('Location: ../admin');
+		$this->response->send();
+	}
+
+	public function deleteArticleAction($id)
+	{
+		$article = Article::find($this->connection, $id);
+
+		$article->delete();
+
+		$this->response->addHeader('Location: ../');
+		$this->response->send();
 	}
 }
