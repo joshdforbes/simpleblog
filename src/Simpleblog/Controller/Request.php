@@ -5,9 +5,9 @@ class Request
 {
 	private $uri;
 	private $method;
-	private $get = array();
-	private $post = array();
-	private $cookie = array();
+	public $get = array();
+	public $post = array();
+	public $cookie = array();
 
 	private $controller;
 	private $action;
