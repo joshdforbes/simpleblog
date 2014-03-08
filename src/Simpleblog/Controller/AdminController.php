@@ -27,7 +27,7 @@ class AdminController extends BaseController
 		$article = new Article($this->connection, $_POST);
 		$article->insert();
 
-		$this->response->addHeader('Location: ../admin');
+		$this->response->addHeader('Location: /admin');
 		$this->response->send();
 	}
 
@@ -37,7 +37,7 @@ class AdminController extends BaseController
 
 		$article->delete();
 
-		$this->response->addHeader('Location: ../');
+		$this->response->addHeader('Location: /admin');
 		$this->response->send();
 	}
 }
