@@ -1,0 +1,16 @@
+{
+  "name": "simpleblog",
+  "version": "0.0.0",
+  "homepage": "https://github.com/joshdforbes/simpleblog",
+  "authors": [
+    "joshdforbes <jdforbes82@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

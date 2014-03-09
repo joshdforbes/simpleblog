@@ -5,4 +5,5 @@ config.php
 
 /vendor/
 /node_modules/
-/logs/*
+/public/bower_components/
+/logs/
