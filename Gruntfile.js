@@ -9,7 +9,7 @@ module.exports = function(grunt) {
                     'public/js/libs/*.js',
                     'public/js/global.js'
                 ],
-                dest: 'public/js/build/production.js',
+                dest: 'public/assets/js/build/production.js',
             }
         }
 
