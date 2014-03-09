@@ -1,12 +1,3 @@
-<html>
-<head>
-	<title>
-		<?php echo $this->data['title']; ?>
-	</title>
-	<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-	
 
 <?php foreach($this->data['articles'] as $article): ?>
 	<article>
@@ -25,6 +16,3 @@ Content Preview: <input type="text" name="content_preview"><br>
 <input type="submit">
 </form>
 
-
-</body>
-</html>

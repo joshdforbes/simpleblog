@@ -4,7 +4,7 @@ namespace Simpleblog\View;
 
 class View
 {
-	public $data = array();
+	protected $data = array();
 
 	public function __construct() {}
 
@@ -14,10 +14,11 @@ class View
 	}
 
 	public function render($template) {
-		$path = $_SERVER['DOCUMENT_ROOT'] . '/assets/templates/' . $template;
-		if (file_exists($path)){
+		$templatePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/templates/' . $template;
+		$mainTemplatePath = $_SERVER['DOCUMENT_ROOT'] . '/assets/templates/mainTemplate.php';
+		if (file_exists($templatePath)){
 			ob_start();
-			require($path);
+			require($mainTemplatePath);
 			return ob_get_clean();
 		} else {
 			Throw new \Exception('Template not found');
