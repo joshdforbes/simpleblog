@@ -66,9 +66,13 @@ class Request
 		return isset($this->get[$name]) ? $this->get[$name] : $default;
 	}
 
-	public function post($name, $default = null)
+	public function post($name = null, $default = null)
 	{
-		return isset($this->post[$name]) ? $this->post[$name] : $default;
+		if (isset($name)) {
+			return isset($this->post[$name]) ? $this->post[$name] : $default;
+		} else {
+			return $this->post;
+		}		
 	}
 
 	public function cookie($name, $default = null)

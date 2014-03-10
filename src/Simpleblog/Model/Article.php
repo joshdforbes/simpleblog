@@ -41,11 +41,11 @@ class Article extends Model
 	public function update()
 	{
 		try {
-			$query = $this->connection->prepare("UPDATE ".self::$table." SET title=:title, content=:content, content_preview:contentPreview WHERE id=:id");
-			$query->bindParam(':id', $this->id);
+			$query = $this->connection->prepare("UPDATE ".self::$table." SET title=:title, content=:content, content_preview=:contentPreview WHERE id=:id");
 			$query->bindParam(':title', $this->title);
 			$query->bindParam(':content', $this->content);
 			$query->bindParam(':contentPreview', $this->contentPreview);
+			$query->bindParam(':id', $this->id);
 
 			return $query->execute();
 		} catch (\PDOException $e) {

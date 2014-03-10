@@ -22,18 +22,11 @@ class AdminController extends BaseController
 	}
 
 
-	public function insertArticleAction()
+	public function saveArticleAction()
 	{
-		$request = $this->request;
-		$data = array(
-			'title' => $request->post('title'),
-			'content' => $request->post('content'),
-			'content_preview' => $request->post('content_preview'),
-		);
-		
-		
-		$article = new Article($this->connection, $data);
-		$article->insert();
+			
+		$article = new Article($this->connection, $this->request->post());
+		$article->save();
 
 		$this->response->addHeader('Location: /admin');
 		$this->response->send();
@@ -46,6 +39,17 @@ class AdminController extends BaseController
 		$article->delete();
 
 		$this->response->addHeader('Location: /admin');
+		$this->response->send();
+	}
+
+	public function editArticleAction($id)
+	{
+		$article = Article::find($this->connection, $id);
+		
+		$this->view->set('article', $article);
+		$this->view->set('title', 'Edit Article');
+		$content = $this->view->render('adminEditArticle.php');
+		$this->response->setContent($content);
 		$this->response->send();
 	}
 }
