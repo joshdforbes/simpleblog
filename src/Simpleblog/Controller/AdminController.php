@@ -24,7 +24,15 @@ class AdminController extends BaseController
 
 	public function insertArticleAction()
 	{
-		$article = new Article($this->connection, $this->request->post);
+		$request = $this->request;
+		$data = array(
+			'title' => $request->post('title'),
+			'content' => $request->post('content'),
+			'content_preview' => $request->post('content_preview'),
+		);
+		
+		
+		$article = new Article($this->connection, $data);
 		$article->insert();
 
 		$this->response->addHeader('Location: /admin');
