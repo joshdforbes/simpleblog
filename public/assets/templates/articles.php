@@ -13,6 +13,5 @@
     <p><?= $article->content; ?></p>
 <?php endforeach; ?>
 
-
 </body>
 </html>

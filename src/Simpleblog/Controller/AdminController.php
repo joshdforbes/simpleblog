@@ -24,7 +24,6 @@ class AdminController extends BaseController
 
 	public function saveArticleAction()
 	{
-			
 		$article = new Article($this->connection, $this->request->post());
 		$article->save();
 
