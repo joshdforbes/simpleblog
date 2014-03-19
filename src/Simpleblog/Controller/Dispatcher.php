@@ -49,7 +49,7 @@ class Dispatcher
 		}
 	}
 
-	public function route()
+	public function init()
 	{
 		$this->setController();
 		$this->setAction();

@@ -13,7 +13,7 @@ $router->route();
 $dispatcher = new Simpleblog\Controller\Dispatcher($request, $connection);
 
 try {
-	$dispatcher->route();
+	$dispatcher->init();
 	$dispatcher->dispatch();
 } catch (\Exception $e) {
 	$dispatcher->setController('error');
