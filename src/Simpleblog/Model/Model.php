@@ -28,6 +28,7 @@ abstract class Model
 				: false;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
 	}
@@ -51,6 +52,7 @@ abstract class Model
     			: false;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
 	}
@@ -77,6 +79,7 @@ abstract class Model
 			return $query->execute();
 		} catch (PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
 

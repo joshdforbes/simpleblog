@@ -34,6 +34,7 @@ class Article extends Model
 			return true;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
 	}
@@ -50,6 +51,7 @@ class Article extends Model
 			return $query->execute();
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
 	}

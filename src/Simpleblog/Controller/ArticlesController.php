@@ -25,12 +25,18 @@ class ArticlesController extends BaseController
 	public function articleAction($id)
 	{
 		$article = Article::find($this->connection, $id);
+
+		if ($article) {
+			$this->view->set('article', $article);
+			$this->view->set('title', 'test 2');
+			$content = $this->view->render('article.php');
+			$this->response->setContent($content);
+			$this->response->send();
+		}
+		else {
+			Throw new \Exception('notFound');
+		}
 		
-		$this->view->set('article', $article);
-		$this->view->set('title', 'test 2');
-		$content = $this->view->render('article.php');
-		$this->response->setContent($content);
-		$this->response->send();
 	}
 
 }

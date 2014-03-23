@@ -22,7 +22,7 @@ class Dispatcher
 			$this->controller = $controller;
 			return $this;
 		}
-		Throw new \Exception('Controller not found');
+		Throw new \Exception('notFound');
 	}
 
 	public function setAction($action = null)
@@ -37,7 +37,7 @@ class Dispatcher
 			$this->action = $action;
 			return $this;
 		}
-		Throw new \Exception('Action not found');
+		Throw new \Exception('notFound');
 	}
 
 	public function setParameters($parameters = null)

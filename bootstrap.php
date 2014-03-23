@@ -15,7 +15,7 @@ try {
 	$dispatcher->dispatch();
 } catch (\Exception $e) {
 	$dispatcher->setController('error');
-	$dispatcher->setAction('notFound');
+	$dispatcher->setAction($e->getMessage());
 	$dispatcher->setParameters((array)$e);
 	$dispatcher->dispatch();
 }	

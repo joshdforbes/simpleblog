@@ -6,7 +6,7 @@ class User extends Model
 {
 	protected static $table = 'users';
 	public $username;
-	public $password;
+	public $hashedPassword;
 	public $salt;
 	public $email;
 
@@ -14,19 +14,17 @@ class User extends Model
 	{
 		parent::__construct($connection, $data);
 
-		$this->salt = 
-
 		$this->username = $data['username'];
-		$this->password = password_hash($data['password'], PASSWORD_DEFAULT);
+		$this->hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
 		$this->email = $data['email'];
 	}
 
 	public function insert()
 	{
 		try {
-			$query = $this->connection->prepare("INSERT INTO ".self::$table."(username, password, email) VALUES (:username, :password, :email)");
+			$query = $this->connection->prepare("INSERT INTO ".self::$table."(username, hashedPassword, email) VALUES (:username, :hashedPassword, :email)");
 			$query->bindParam(':username', $this->username);
-			$query->bindParam(':password', $this->password);
+			$query->bindParam(':hashedPassword', $this->password);
 			$query->bindParam(':email', $this->email);
 			$query->execute();
 
@@ -35,6 +33,42 @@ class User extends Model
 			return true;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
 			return false;
 		}
+	}
+
+	public static function findByUsername(\PDO $connection, $username)
+	{
+		try {
+			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username LIMIT 1");
+			$query->bindParam(':username', $username);
+			$query->execute();
+
+			return ($query->rowCount() === 1)
+				? new static($connection, $query->fetch(\PDO::FETCH_ASSOC))
+				: false;
+		} catch (\PDOException $e) {
+			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
+			return false;
+		}
+	}
+
+	public function isUniqueUsername($username)
+	{
+		try {
+			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username LIMIT 1");
+			$query->bindParam(':username', $username);
+			$query->execute();
+
+			return ($query->rowCount() === 1)
+				? true;
+				: false;
+		} catch (\PDOException $e) {
+			Logger::log($e->getMessage());
+			Throw new \Exception('databaseError');
+			return false;
+		}
+
 	}
