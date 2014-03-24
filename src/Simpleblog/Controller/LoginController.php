@@ -2,13 +2,14 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\User as User;
+use Simpleblog\Classes\Auth;
 
 
 class LoginController extends BaseController
 {
 	public function __construct(Request $request, \PDO $connection)
 	{
-		parent::__construct($request, $connection);		
+		parent::__construct($request, $connection);	
 	}
 
 	public function indexAction()
@@ -18,3 +19,22 @@ class LoginController extends BaseController
 		$this->response->setContent($content);
 		$this->response->send();
 	}
+
+	public function loginAction()
+	{
+		$user = User::findByUsername($this->connection, $this->request->post('username'));
+		if (!password_verify($this->request->post('password'), $user->getHashedPassword())) {
+			$this->response->addHeader('Location: /login');
+			$this->response->send();
+		}
+
+		if ($user->getPrivledge() === 'admin') {
+			$this->response->addHeader('Location: /admin');
+			$this->response->send();
+		}
+
+		$this->response->addHeader('Location: /');
+		$this->response->send();
+	}
+
+}

@@ -21,7 +21,7 @@ class View
 			require($mainTemplatePath);
 			return ob_get_clean();
 		} else {
-			Throw new \Exception('Template not found');
+			Throw new \Exception('notFound');
 		}
 		
 	}

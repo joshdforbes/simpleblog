@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-
+        "ircmaxell/password-compat": "dev-master"
     },
     "autoload": {
         "psr-0": {

@@ -15,7 +15,7 @@ class User extends Model
 		parent::__construct($connection, $data);
 
 		$this->username = $data['username'];
-		$this->hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
+		$this->hashedPassword = $data['hashedPassword'];
 		$this->email = $data['email'];
 		$this->privledge = $data['privledge'];
 	}
@@ -60,9 +60,9 @@ class User extends Model
 	public static function findByUsernameAndPassword(\PDO $connection, $username, $password)
 	{
 		try {
-			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username AND password = :password LIMIT 1");
+			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username AND hashedPassword = :hashedPassword LIMIT 1");
 			$query->bindParam(':username', $username);
-			$query->bindParam(':password', $password);
+			$query->bindParam(':hashedPassword', $hashedPassword);
 			$query->execute();
 
 			return ($query->rowCount() === 1)
@@ -83,7 +83,7 @@ class User extends Model
 			$query->execute();
 
 			return ($query->rowCount() === 1)
-				? true;
+				? true
 				: false;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
@@ -107,6 +107,11 @@ class User extends Model
 			Throw new \Exception('databaseError');
 			return false;
 		}
+	}
+
+	public function getHashedPassword()
+	{
+		return $this->hashedPassword;
 	}
 
 }
