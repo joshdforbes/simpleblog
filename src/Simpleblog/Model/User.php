@@ -5,19 +5,21 @@ use Simpleblog\Classes\Logger;
 class User extends Model
 {
 	protected static $table = 'users';
-	private $username;
+	public $username;
 	private $hashedPassword;
-	private $email;
-	private $privledge;
+	public $email;
+	public $privledge;
 
 	public function __construct(\PDO $connection, array $data)
 	{
 		parent::__construct($connection, $data);
 
-		$this->username = $data['username'];
-		$this->hashedPassword = $data['hashedPassword'];
-		$this->email = $data['email'];
-		$this->privledge = $data['privledge'];
+		$this->username = (string) $data['username'];
+		$this->hashedPassword = isset($data['password']) 
+			? password_hash((string) $data['password'], PASSWORD_BCRYPT)
+			: (string) $data['hashedPassword'];
+		$this->email = (string) $data['email'];
+		$this->privledge = (string) $data['privledge'];
 	}
 
 	public function insert()
@@ -25,7 +27,7 @@ class User extends Model
 		try {
 			$query = $this->connection->prepare("INSERT INTO ".self::$table."(username, hashedPassword, email, privledge) VALUES (:username, :hashedPassword, :email, :privledge)");
 			$query->bindParam(':username', $this->username);
-			$query->bindParam(':hashedPassword', $this->password);
+			$query->bindParam(':hashedPassword', $this->hashedPassword);
 			$query->bindParam(':email', $this->email);
 			$query->bindParam(':privledge', $this->privledge);
 			$query->execute();
@@ -43,12 +45,12 @@ class User extends Model
 	public static function findByUsername(\PDO $connection, $username)
 	{
 		try {
-			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username LIMIT 1");
+			$query = $connection->prepare("SELECT * from ".self::$table." WHERE username = :username LIMIT 1");
 			$query->bindParam(':username', $username);
 			$query->execute();
 
 			return ($query->rowCount() === 1)
-				? new static($connection, $query->fetch(\PDO::FETCH_ASSOC))
+				? new self($connection, $query->fetch(\PDO::FETCH_ASSOC))
 				: false;
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
@@ -112,6 +114,11 @@ class User extends Model
 	public function getHashedPassword()
 	{
 		return $this->hashedPassword;
+	}
+
+	public function getPrivledge()
+	{
+		return $this->privledge;
 	}
 
 }

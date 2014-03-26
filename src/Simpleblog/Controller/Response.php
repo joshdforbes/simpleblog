@@ -21,7 +21,7 @@ class Response
 
 	public function setContent($content)
 	{
-		$this->content = $content;
+		$this->content .= $content;
 		return $this;
 	}
 
@@ -45,6 +45,7 @@ class Response
 			header($header);
 		}
 		echo $this->content;
+		exit();
 	}
 
 }

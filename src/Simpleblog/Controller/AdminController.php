@@ -2,6 +2,7 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\Article as Article;
+use Simpleblog\Model\User as User;
 
 class AdminController extends BaseController 
 {
@@ -49,6 +50,26 @@ class AdminController extends BaseController
 		$this->view->set('title', 'Edit Article');
 		$content = $this->view->render('adminEditArticle.php');
 		$this->response->setContent($content);
+		$this->response->send();
+	}
+
+	public function usersAction()
+	{
+		$users = User::findAll($this->connection);
+		
+		$this->view->set('users', $users);
+		$this->view->set('title', 'Users');
+		$content = $this->view->render('adminUsers.php');
+		$this->response->setContent($content);
+		$this->response->send();
+	}
+
+	public function saveUserAction()
+	{
+		$user = new User($this->connection, $this->request->post());
+		$user->save();
+
+		$this->response->addHeader('Location: /admin/users');
 		$this->response->send();
 	}
 }
