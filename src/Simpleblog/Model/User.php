@@ -59,24 +59,6 @@ class User extends Model
 		}
 	}
 
-	public static function findByUsernameAndPassword(\PDO $connection, $username, $password)
-	{
-		try {
-			$query = $connection->prepare("SELECT * from ".static::$table." WHERE username = :username AND hashedPassword = :hashedPassword LIMIT 1");
-			$query->bindParam(':username', $username);
-			$query->bindParam(':hashedPassword', $hashedPassword);
-			$query->execute();
-
-			return ($query->rowCount() === 1)
-				? new static($connection, $query->fetch(\PDO::FETCH_ASSOC))
-				: false;
-		} catch (\PDOException $e) {
-			Logger::log($e->getMessage());
-			Throw new \Exception('databaseError');
-			return false;
-		}
-	}
-
 	public function isUniqueUsername($username)
 	{
 		try {

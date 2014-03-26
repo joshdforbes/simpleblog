@@ -2,9 +2,7 @@
 
 namespace Simpleblog\Controller;
 use Simpleblog\Model\User as User;
-use Simpleblog\Classes\Auth;
-use Simpleblog\Classes\Logger;
-
+use Simpleblog\Classes\Auth as Auth;
 
 class LoginController extends BaseController
 {
@@ -29,12 +27,12 @@ class LoginController extends BaseController
 			$this->response->setContent($this->indexAction());
 			$this->response->send();
 		}
+
 		$loggedIn = password_verify($this->request->post('password'), $user->getHashedPassword());
 
-		if ($loggedIn && $user->getPrivledge() === 'admin') {
-			$this->response->addHeader('Location: /admin');
-			$this->response->send();
-		} elseif ($loggedIn) {
+		if ($loggedIn) {
+			session_start();
+			$_SESSION['username'] = $user->username;
 			$this->response->addHeader('Location: /');
 			$this->response->send();
 		} else {
@@ -42,6 +40,11 @@ class LoginController extends BaseController
 			$this->response->setContent($this->indexAction());
 			$this->response->send();
 		}
+	}
+
+	public function logoutAction(){
+    	$_SESSION = array();
+    	session_destroy();
 	}
 
 }

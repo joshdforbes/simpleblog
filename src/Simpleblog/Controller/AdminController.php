@@ -3,12 +3,19 @@
 namespace Simpleblog\Controller;
 use Simpleblog\Model\Article as Article;
 use Simpleblog\Model\User as User;
+use Simpleblog\Classes\Auth as Auth;
 
 class AdminController extends BaseController 
 {
 	public function __construct(Request $request, \PDO $connection)
 	{
-		parent::__construct($request, $connection);		
+		parent::__construct($request, $connection);
+
+		$auth = new Auth($connection);
+		if (!$auth->isAdmin()) {
+			$this->response->addHeader('Location: /');
+			$this->response->send();
+		}	
 	}
 
 	public function indexAction()
