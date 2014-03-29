@@ -79,4 +79,25 @@ class AdminController extends BaseController
 		$this->response->addHeader('Location: /admin/users');
 		$this->response->send();
 	}
+
+	public function deleteUserAction($id)
+	{
+		$user = User::find($this->connection, $id);
+
+		$user->delete();
+
+		$this->response->addHeader('Location: /admin/users');
+		$this->response->send();
+	}
+
+	public function editUserAction($id)
+	{
+		$user = User::find($this->connection, $id);
+		
+		$this->view->set('user', $user);
+		$this->view->set('title', 'Edit User');
+		$content = $this->view->render('adminEditUser.php');
+		$this->response->setContent($content);
+		$this->response->send();
+	}
 }
