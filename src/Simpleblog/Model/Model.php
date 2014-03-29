@@ -3,11 +3,31 @@ namespace Simpleblog\Model;
 
 use Simpleblog\Classes\Logger;
 
+/**
+ * Parent class for Models in the Simpleblog framework
+ */
 abstract class Model
 {
+	/**
+	 * The connection used by the model
+	 * 
+	 * @var PDO
+	 */
 	protected $connection;
+
+	/**
+	 * The id of a single record in the model
+	 * 
+	 * @var string
+	 */
 	public $id;
 
+	/**
+	 * Create a new model instance
+	 * 
+	 * @param PDO   $connection
+	 * @param array $data used to create child model
+	 */
 	public function __construct(\PDO $connection, array $data)
 	{
 		$this->connection = $connection;
@@ -16,6 +36,15 @@ abstract class Model
 			: null;
 	}
 
+	/**
+	 * searches database for a record that matches specified id
+	 * 
+	 * @param  PDO    $connection
+	 * @param  string $id
+	 * @return Model|false new Model instance or false
+	 *
+	 * @throws Exception routes to errorController calling databaseErrorAction
+	 */
 	public static function find(\PDO $connection, $id)
 	{
 		try {
@@ -33,6 +62,17 @@ abstract class Model
 		}
 	}
 
+	/**
+	 * searches database and returns all instances of child Model
+	 * 
+	 * @param  PDO     $connection
+	 * @param  string  $orderBy defaults to date DESC
+	 * @param  integer $starting indicates where to start returning records, defaults to first record
+	 * @param  integer $ending indicates where to stop returning records, defaults to five
+	 * @return Model|false returns an array of Model instances or false
+	 *
+	 * @throws Exception routes to errorController calling databaseErrorAction
+	 */
 	public static function findAll(\PDO $connection, $orderBy = "date DESC", $starting = 0, $ending = 5)
 	{
 		try {
@@ -57,6 +97,11 @@ abstract class Model
 		}
 	}
 
+	/**
+	 * calls either insert() or update() depending on whether the record already exists in the database (determined by id)
+	 *
+	 * @return Model
+	 */
 	public function save()
 	{
 		if (is_null($this->id)) {
@@ -64,12 +109,30 @@ abstract class Model
 		} else {
 			$this->update();
 		}
+
+		return $this;
 	}
 
+	/**
+	 * implemented by child class
+	 * 
+	 * @abstract
+	 */
 	public abstract function insert();
 
+	/**
+	 * implemented by child class
+	 * 
+	 * @abstract
+	 */
 	public abstract function update();
 
+	/**
+	 * removes this instance of the Model from the database
+	 * @return true|false 
+	 *
+	 * @throws Exception routes to errorController calling databaseErrorAction
+	 */
 	public function delete()
 	{
 		try {
