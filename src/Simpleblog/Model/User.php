@@ -4,12 +4,45 @@ use Simpleblog\Classes\Logger;
 
 class User extends Model
 {
+	/**
+	 * name of database table used by User
+	 * 
+	 * @var string
+	 */
 	protected static $table = 'users';
+
+	/**
+	 * @var string
+	 */
 	public $username;
+
+	/**
+	 * hashed using php 5.5 password_hash function
+	 * 
+	 * @var string
+	 */
 	private $hashedPassword;
+
+	/**
+	 * @var string
+	 */
 	public $email;
+
+	/**
+	 * privledge level, admin or user
+	 * 
+	 * @var string
+	 */
 	public $privledge;
 
+	/**
+	 * create a User instance from supplied data
+	 * if the data contains a $password then hash it and store
+	 * as $hashedPassword
+	 * 
+	 * @param PDO   $connection
+	 * @param array $data info required for User instance
+	 */
 	public function __construct(\PDO $connection, array $data)
 	{
 		parent::__construct($connection, $data);
@@ -22,6 +55,13 @@ class User extends Model
 		$this->privledge = (string) $data['privledge'];
 	}
 
+	/**
+	 * insert a new User into the database
+	 * 
+	 * @return true|false indicates whether User was successfully inserted
+	 *
+	 * @throws Exception if User fails to insert - routes to errorController
+	 */
 	public function insert()
 	{
 		try {
@@ -42,6 +82,13 @@ class User extends Model
 		}
 	}
 
+	/**
+	 * allows Users to be searched by username instead of id
+	 * 
+	 * @param  PDO    $connection
+	 * @param  string $username
+	 * @return User|false 	new User instance or false
+	 */
 	public static function findByUsername(\PDO $connection, $username)
 	{
 		try {
@@ -76,6 +123,13 @@ class User extends Model
 		}
 	}
 
+	/**
+	 * updates info for an User that already exsists in the database
+	 * 
+	 * @return PDOStatement|false indicates whether User was successfully updated
+	 *
+	 * @throws Exception if User fails to update - routes to errorController
+	 */
 	public function update()
 	{
 		try {
@@ -93,11 +147,21 @@ class User extends Model
 		}
 	}
 
+	/**
+	 * getter for $hashedPassword
+	 * 
+	 * @return string 
+	 */
 	public function getHashedPassword()
 	{
 		return $this->hashedPassword;
 	}
 
+	/**
+	 * getter for $privledge
+	 * 
+	 * @return string indicates a users privledge level (admin or user)
+	 */
 	public function getPrivledge()
 	{
 		return $this->privledge;
