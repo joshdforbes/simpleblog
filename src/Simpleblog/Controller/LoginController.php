@@ -64,15 +64,4 @@ class LoginController extends BaseController
 		}
 	}
 
-	/** 
-	 * temporary location for logout - will probably get its own controller so we can just
-	 * route to /logout instead of /login/logout 
-	 * 
-	 * @return void
-	 */
-	public function logoutAction(){
-    	$_SESSION = array();
-    	session_destroy();
-	}
-
 }
