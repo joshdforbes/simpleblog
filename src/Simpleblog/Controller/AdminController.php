@@ -29,7 +29,7 @@ class AdminController extends BaseController
 	}
 
 	/**
-	 * default action
+	 * default action - acts as admin dashboard
 	 * 
 	 * @return void
 	 */
@@ -38,7 +38,23 @@ class AdminController extends BaseController
 		$articles = Article::findAll($this->connection);
 		
 		$this->view->set('articles', $articles);
-		$this->view->set('title', 'test page');
+		$this->view->set('title', 'Admin Dashboard');
+		$content = $this->view->render('admin.php');
+		$this->response->setContent($content);
+		$this->response->send();
+	}
+
+	/**
+	 * finds all Articles, set the Articles data on the view object, and renders the appropriate template
+	 * 
+	 * @return void
+	 */
+	public function articlesAction()
+	{
+		$articles = Article::findAll($this->connection);
+		
+		$this->view->set('articles', $articles);
+		$this->view->set('title', 'Articles');
 		$content = $this->view->render('adminArticles.php');
 		$this->response->setContent($content);
 		$this->response->send();
