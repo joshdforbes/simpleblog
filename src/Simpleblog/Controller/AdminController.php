@@ -7,6 +7,16 @@ use Simpleblog\Classes\Auth as Auth;
 
 class AdminController extends BaseController 
 {
+	/**
+	 * calls BaseControllers constructor
+	 * creates a new Auth object and verifies that the user is an admin (this is a password protected page)
+	 * if the user is not an admin, redirects to the root
+	 * 
+	 * @param Request $request    
+	 * @param PDO     $connection
+	 * @return  void 
+	 * 
+	 */
 	public function __construct(Request $request, \PDO $connection)
 	{
 		parent::__construct($request, $connection);
@@ -18,6 +28,11 @@ class AdminController extends BaseController
 		}	
 	}
 
+	/**
+	 * default action
+	 * 
+	 * @return void
+	 */
 	public function indexAction()
 	{
 		$articles = Article::findAll($this->connection);
@@ -29,7 +44,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
-
+	/**
+	 * creates an Article object based on data supplied by the request object
+	 * calls the save method on the Article object which either updates or creates the item in the database
+	 * reloads the admin page
+	 * 
+	 * @return void
+	 */
 	public function saveArticleAction()
 	{
 		$article = new Article($this->connection, $this->request->post());
@@ -39,6 +60,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * finds an article based on the supplied id and deletes it from the database
+	 * reloads the admin page
+	 * 
+	 * @param  string $id
+	 * @return void
+	 */
 	public function deleteArticleAction($id)
 	{
 		$article = Article::find($this->connection, $id);
@@ -49,6 +77,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * finds an article based on the supplied id, sets that articles data on the view object, 
+	 * and renders the appropriate template
+	 * 
+	 * @param  string $id
+	 * @return void
+	 */
 	public function editArticleAction($id)
 	{
 		$article = Article::find($this->connection, $id);
@@ -60,6 +95,11 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * finds all users, sets the user data on the view object, and renders the appropriate template
+	 * 
+	 * @return void
+	 */
 	public function usersAction()
 	{
 		$users = User::findAll($this->connection);
@@ -71,6 +111,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * creates an User object based on data supplied by the request object
+	 * calls the save method on the User object which either updates or creates the User in the database
+	 * reloads the admin/users page
+	 * 
+	 * @return void
+	 */
 	public function saveUserAction()
 	{
 		$user = new User($this->connection, $this->request->post());
@@ -80,6 +127,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * finds a User based on the supplied id and deletes it from the database
+	 * reloads the admin/users page
+	 * 
+	 * @param  string $id
+	 * @return void
+	 */
 	public function deleteUserAction($id)
 	{
 		$user = User::find($this->connection, $id);
@@ -90,6 +144,13 @@ class AdminController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * finds a User based on the supplied id, sets that Users data on the view object, 
+	 * and renders the appropriate template
+	 * 
+	 * @param  string $id
+	 * @return void
+	 */
 	public function editUserAction($id)
 	{
 		$user = User::find($this->connection, $id);

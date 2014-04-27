@@ -6,11 +6,22 @@ use Simpleblog\Classes\Auth as Auth;
 
 class LoginController extends BaseController
 {
+	/**
+	 * calls BaseController constructor
+	 * 
+	 * @param Request $request    
+	 * @param PDO     $connection
+	 */
 	public function __construct(Request $request, \PDO $connection)
 	{
 		parent::__construct($request, $connection);	
 	}
 
+	/**
+	 * The default action - displays the login form
+	 * 
+	 * @return void
+	 */
 	public function indexAction()
 	{	
 		$this->view->set('title', 'Login');
@@ -19,6 +30,17 @@ class LoginController extends BaseController
 		$this->response->send();
 	}
 
+	/**
+	 * attempts to log the user in
+	 *
+	 * attempts to find the user based on the username in the request object.
+	 * if the user is not found, reload the login page with an error message
+	 * if the user is found, attempt to verify the password using password_verify
+	 * if the passwords match - log the user in and redirect to the root
+	 * if the passwords do not match, reload the login page with an error message
+	 * 
+	 * @return void
+	 */
 	public function loginAction()
 	{
 		$user = User::findByUsername($this->connection, $this->request->post('username'));
@@ -42,6 +64,12 @@ class LoginController extends BaseController
 		}
 	}
 
+	/** 
+	 * temporary location for logout - will probably get its own controller so we can just
+	 * route to /logout instead of /login/logout 
+	 * 
+	 * @return void
+	 */
 	public function logoutAction(){
     	$_SESSION = array();
     	session_destroy();
