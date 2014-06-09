@@ -1,7 +1,22 @@
 module.exports = function(grunt) {
 
+
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+
+        less: {
+            development: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: {
+                    'public/assets/css/build/main.css': 'public/assets/css/main.less'
+                }
+            }
+        },
 
         concat: {
             dist: {
@@ -38,8 +53,8 @@ module.exports = function(grunt) {
                 }
             },
             scripts: {
-                files: ['public/assets/js/*.js'],
-                tasks: ['concat', 'uglify'],
+                files: ['public/assets/js/*.js', 'public/assets/css/*.less'],
+                tasks: ['concat', 'uglify', 'less'],
                 options: {
                     livereload: true,
                 },
@@ -53,7 +68,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
-    grunt.registerTask('default', ['concat', 'uglify', 'imagemin', 'watch']);
+    grunt.registerTask('default', ['concat', 'uglify', 'imagemin', 'less', 'watch']);
 
 };
