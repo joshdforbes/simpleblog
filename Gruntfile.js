@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    'public/assets/css/build/main.css': 'public/assets/css/main.less'
+                    'public/assets/css/styles.css': 'public/assets/less/styles.less'
                 }
             }
         },
