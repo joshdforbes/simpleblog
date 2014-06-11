@@ -16,6 +16,9 @@
 </head>
 <body>
 	<div class="container">
+        <div class="header">
+            <h1>SimpleBlog</h1>
+        </div>
 
 		<?php require($templatePath); ?> 
 
