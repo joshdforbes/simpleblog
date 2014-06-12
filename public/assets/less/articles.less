@@ -3,24 +3,36 @@
 }
 
 article {
-	#gradient.vertical(@grayLighter;@white;0%;35%);
-	border-top: 1px solid #E2E2E2;
+	#gradient.vertical(@gray-lightest;@white;0%;50%);
+	border-top: 2px solid @gray-lighter;
 
-	padding: 5px 20px;
+	padding: 8px 30px;
 
 	img {
-		margin: auto 20px;
+		margin: 20px auto;
 	}
 
 	h2 {
+		
+  		a, 
+      	a:link,
+      	a:visited,
+      	a:hover,
+      	a:active {
+      		color: inherit;
+      		text-decoration: inherit;
+      		font-weight: inherit;
+      	}
+
+		font-family: 'Londrina';
 		color: @primaryDark;
 		margin-bottom: 5px;
-		padding-top: 0px;
+		padding-top: 10px;
 		margin-top: 0px;
 	}
 
 	h5 {
-		color: @primaryLight;
+		color: @gray-light;
 		margin-top: 0px;
 		margin-bottom: 10px;
 

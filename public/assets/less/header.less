@@ -1,0 +1,34 @@
+.header {
+
+	@media (min-width: 768px) {
+  		max-width: 730px;
+  	}
+
+  	margin: 40px auto;
+  	h1 {
+  		a, 
+  		a:link,
+  		a:visited,
+  		a:hover,
+  		a:active {
+			color: inherit;
+			text-decoration: inherit;
+			font-weight: inherit;
+  		}
+  		color: @primaryDark;
+  		font-family: 'Londrina', @font-family-sans-serif;
+  		text-align: center;
+  		@media (min-width: 768px) {
+  			font-size: 9em;
+  		}	
+  		@media (max-width: 768px) {
+  			font-size: 7em;
+  		}
+  		@media (max-width: 480px) {
+  			font-size: 5em;
+  		}
+
+	}
+
+
+}

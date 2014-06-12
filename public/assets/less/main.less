@@ -8,13 +8,22 @@ body {
   		max-width: 730px;
   	}	
 	background-color: white;
-  	border-left: 1px solid @primaryLight;
-  	border-right:  1px solid @primaryLight;
+  	border-left: 1px solid @gray-lighter;
+  	border-right:  1px solid @gray-lighter;
   	padding: 0px;
 }
 
-h1 a{
-	color: @primaryDark;
+h2 {
+  color: @primaryDark;
+  a, 
+      a:link,
+      a:visited,
+      a:hover,
+      a:active {
+      color: inherit;
+      text-decoration: inherit;
+      font-weight: inherit;
+      }
 }
 
 h5 {
