@@ -13,17 +13,7 @@ article {
 	}
 
 	h2 {
-		
-  		a, 
-      	a:link,
-      	a:visited,
-      	a:hover,
-      	a:active {
-      		color: inherit;
-      		text-decoration: inherit;
-      		font-weight: inherit;
-      	}
-
+		.anchor-no-style;
 		font-family: 'Londrina';
 		color: @primaryDark;
 		margin-bottom: 5px;
@@ -38,5 +28,13 @@ article {
 
 	}
 
+	.read-more-link {
+		font-weight: bold;
+		color: @primaryDark;
+	}
 
+}
+
+article:first-child {
+	border-top: 0px;
 }

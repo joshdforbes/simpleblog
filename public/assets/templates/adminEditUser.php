@@ -1,3 +1,5 @@
+<?php require("adminBar.php"); ?> 
+
 	
 <h1><?php echo $this->data['user']->username; ?></h1>
 <h5><?php echo $this->data['user']->email; ?></h5>

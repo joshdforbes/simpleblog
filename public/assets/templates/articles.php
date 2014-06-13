@@ -6,6 +6,9 @@
 	
     	<h5><?= $article->date; ?></h5>
     	<p><?= $article->contentPreview; ?></p>
+    	<a href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</p>
+
+
     </article>
 <?php endforeach; ?>
 

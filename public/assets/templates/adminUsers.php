@@ -1,3 +1,5 @@
+<?php require("adminBar.php"); ?> 
+
 <?php foreach($this->data['users'] as $user): ?>
 	<article>
 	<h1><a href="/users/user/<?= $user->id; ?>"> <?= $user->username; ?> </a></h1>
