@@ -94,6 +94,21 @@ class AdminController extends BaseController
 	}
 
 	/**
+	 * renders the form for article creation
+	 * 
+	 * @return void
+	 */
+	public function createArticleAction()
+	{
+		$article = Article::find($this->connection, $id);
+		
+		$this->view->set('title', 'Create Article');
+		$content = $this->view->render('adminCreateArticle.php');
+		$this->response->setContent($content);
+		$this->response->send();
+	}
+
+	/**
 	 * finds an article based on the supplied id, sets that articles data on the view object, 
 	 * and renders the appropriate template
 	 * 

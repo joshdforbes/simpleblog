@@ -12,10 +12,13 @@
 	width: 10em;
 	left: 50%;
 	top: -2%;
-	background-color: @accent;
-	color: @white;
 	.anchor-no-style;
 	margin-left: -5em;
+	.button-variant(@accentLight; @accent; @accentLight);
+
+	h5 {
+		color: @white;
+	}
 
 
 	@media (max-width: 768px) {

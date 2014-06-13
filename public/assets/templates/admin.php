@@ -1,8 +1,8 @@
 <?php require("adminBar.php"); ?> 
 
-<button class="create-article-button btn">
+<a href="/admin/createArticle/"><button class="create-article-button btn">
 	<h5>Create Article</h5>
-</button>
+</button></a>
 
 <?php foreach($this->data['articles'] as $article): ?>
 	<article>
@@ -15,16 +15,10 @@
 	</div>
 
     <p><?= $article->contentPreview; ?></p>
-    <a href=href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</p>
+    <a href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</p>
 
     
 	</article>
 <?php endforeach; ?>
 
-<form action="/admin/saveArticle" method="post">
-Title: <input type="text" name="title"><br>
-Content: <input type="text" name="content"><br>
-Content Preview: <input type="text" name="content_preview"><br>
-<input type="submit">
-</form>
 
