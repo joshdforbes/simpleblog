@@ -19,7 +19,7 @@
         <h1><a href="/">SimpleBlog</a></h1>
     </div>
 
-	<div class="container">
+	<div class="container content-wrapper">
 
 		<?php require($templatePath); ?> 
 
