@@ -45,7 +45,8 @@ class LoginController extends BaseController
 	{
 		$user = User::findByUsername($this->connection, $this->request->post('username'));
 		if (!$user) {
-			$this->response->setContent($loginError = 'Invalid Username or Password');
+			$this->view->set('loginError', 'Invalid Username or Password');
+			//$this->response->setContent($loginError = 'Invalid Username or Password');
 			$this->response->setContent($this->indexAction());
 			$this->response->send();
 		}
@@ -58,7 +59,8 @@ class LoginController extends BaseController
 			$this->response->addHeader('Location: /');
 			$this->response->send();
 		} else {
-			$this->response->setContent($loginError = 'Invalid Username or Password');
+			$this->view->set('loginError', 'Invalid Username or Password');
+			//$this->response->setContent($loginError = 'Invalid Username or Password');
 			$this->response->setContent($this->indexAction());
 			$this->response->send();
 		}

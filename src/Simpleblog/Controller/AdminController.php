@@ -25,7 +25,8 @@ class AdminController extends BaseController
 		if (!$auth->isAdmin()) {
 			$this->response->addHeader('Location: /');
 			$this->response->send();
-		}	
+		}
+
 	}
 
 	/**
@@ -99,9 +100,7 @@ class AdminController extends BaseController
 	 * @return void
 	 */
 	public function createArticleAction()
-	{
-		$article = Article::find($this->connection, $id);
-		
+	{		
 		$this->view->set('title', 'Create Article');
 		$content = $this->view->render('adminCreateArticle.php');
 		$this->response->setContent($content);
