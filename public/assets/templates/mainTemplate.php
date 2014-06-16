@@ -19,11 +19,8 @@
         <h1><a href="/">SimpleBlog</a></h1>
     </div>
 
-	<div class="container content-wrapper">
+	<?php require($templatePath); ?> 
 
-		<?php require($templatePath); ?> 
-
-	</div> <!-- /container -->
 
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

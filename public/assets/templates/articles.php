@@ -1,4 +1,4 @@
-<div class="articles">
+<div class="article-wrapper container">
 
 <?php foreach($this->data['articles'] as $article): ?>
 	<article>

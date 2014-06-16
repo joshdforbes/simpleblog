@@ -1,10 +1,16 @@
-<?php require("adminBar.php"); ?> 
+<div class="article-wrapper container">
 
-<form action="/admin/saveArticle" method="post">
-Title: <input type="text" name="title"><br>
-Content: <textarea name="content" rows="10" cols="80"><br>
-Content Preview: <textarea name="content_preview" rows="10" cols="80"></textarea><br>
-<input type="submit">
+<?php require("adminBar.php"); ?> 
+<article>
+
+<form action="/admin/saveArticle" method="post" class="form-create-article">
+	<h2 class="form-heading">Create Article</h2>
+	<input type="text" class="form-control" name="title" placeholder="Title" required autofocus>
+	<textarea rows="15" class="form-control" name="content" placeholder="Content" required></textarea>
+	<textarea rows="10" class="form-control" name="content_preview" placeholder="Content Preview" required></textarea>
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 </form>
 
+</article>
+</div>
 

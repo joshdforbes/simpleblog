@@ -1,3 +1,5 @@
+<div class="article-wrapper container">
+
 <?php require("adminBar.php"); ?> 
 
 <a href="/admin/createArticle/"><button class="create-article-button btn">
@@ -17,8 +19,9 @@
     <p><?= $article->contentPreview; ?></p>
     <a href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</p>
 
-    
 	</article>
 <?php endforeach; ?>
+
+</div>
 
 
