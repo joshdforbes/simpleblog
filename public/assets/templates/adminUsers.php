@@ -15,10 +15,9 @@
 		<td><?= $user->username; ?></td>
 		<td><?= $user->email; ?></td>
 		<td><?= $user->getPrivledge(); ?></td>
-		<div class="admin-buttons">
-		<td><button class="btn btn-danger"><a href="/admin/deleteUser/<?= $user->id; ?>"><i class="fa fa-trash-o"></i><span class="button-text">DELETE</span></a></button></td>
-		<td><button class="btn btn-primary"><a href="/admin/editUser/<?= $user->id; ?>"><i class="fa fa-cog"></i><span class="button-text">EDIT</span></a></button></td>
-    	</div>
+		<td class="button-cell"><button class="btn btn-primary"><a href="/admin/editUser/<?= $user->id; ?>"><i class="fa fa-cog"></i><span class="button-text">EDIT</span></a></button></td>
+    	<td class="button-cell"><button class="btn btn-danger"><a href="/admin/deleteUser/<?= $user->id; ?>"><i class="fa fa-trash-o"></i><span class="button-text">DELETE</span></a></button></td>
+
     </tr>
     <?php endforeach; ?>
 	</tbody>
