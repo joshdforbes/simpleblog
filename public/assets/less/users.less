@@ -1,0 +1,41 @@
+table {
+	max-width: 768px;
+	margin: 0 auto;
+	margin-top: 20px;
+	background-color: @white;
+	.table;
+	.table-bordered;
+	.table-striped;
+
+	thead {
+		@media (max-width: 600px) {
+  			font-size: .85em;
+  		}
+	}
+
+	td {
+		@media (max-width: 600px) {
+			font-size: .8em;
+		}
+	}
+	
+
+	button {
+		.fa {
+			display: none;
+		}
+		width: 7em;
+		.anchor-no-style;
+		@media (max-width: 540px) {
+  			width: 2em;
+  			.button-text {
+  				.hide-text();
+  			}
+  			.fa {
+  				margin-left: -4px;
+  				display: inline;
+  			}
+  		}
+
+	}
+}
