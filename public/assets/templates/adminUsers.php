@@ -24,11 +24,12 @@
 </table>
 
 
-<form action="/admin/saveUser" method="post">
-Username: <input type="text" name="username"><br>
-Password: <input type="password" name="password"><br>
-Email: <input type="text" name="email"><br>
-Privledge: <input type="text" name="privledge"><br>
-<input type="submit">
+<form action="/admin/saveUser" method="post" class="form-create-user">
+	<h2 class="form-heading">Create New User</h2>
+	<input type="text" class="form-control" name="username" placeholder="Username" required autofocus>
+	<input type="password" class="form-control" name="password" placeholder="Password" required>
+	<input type="email" class="form-control" name="email" placeholder="Email" required>
+	<input type="text" class="form-control" name="privledge" placeholder="Privledge" required>	
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
 </div>
