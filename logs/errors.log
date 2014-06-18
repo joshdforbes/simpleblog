@@ -1,0 +1,2 @@
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'date' in 'order clause'   |  Date:  17 06 2014 07:54:56
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'date' in 'order clause'   |  Date:  17 06 2014 07:55:00

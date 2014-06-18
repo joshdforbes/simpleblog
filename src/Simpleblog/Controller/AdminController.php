@@ -132,7 +132,7 @@ class AdminController extends BaseController
 	 */
 	public function usersAction()
 	{
-		$users = User::findAll($this->connection);
+		$users = User::findAll($this->connection, 'username asc');
 		
 		$this->view->set('users', $users);
 		$this->view->set('title', 'Users');
