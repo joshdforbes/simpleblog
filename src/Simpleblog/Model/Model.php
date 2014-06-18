@@ -73,11 +73,10 @@ abstract class Model
 	 *
 	 * @throws Exception routes to errorController calling databaseErrorAction
 	 */
-	public static function findAll(\PDO $connection, $orderBy = "date DESC", $starting = 0, $ending = 5)
+	public static function findAll(\PDO $connection, $orderBy = 'date DESC', $starting = 0, $ending = 5)
 	{
 		try {
-			$query = $connection->prepare("SELECT * FROM ".static::$table." ORDER BY :orderBy LIMIT :starting, :ending");
-			$query->bindParam(':orderBy', $orderBy);
+			$query = $connection->prepare("SELECT * FROM ".static::$table." ORDER BY ".$orderBy." LIMIT :starting, :ending");
 			$query->bindParam(':starting', $starting, \PDO::PARAM_INT);
 			$query->bindParam(':ending', $ending, \PDO::PARAM_INT);
 			$query->execute();
