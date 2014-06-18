@@ -27,7 +27,7 @@ class ArticlesController extends BaseController
 		$articles = Article::findAll($this->connection);
 		
 		$this->view->set('articles', $articles);
-		$this->view->set('title', 'test page');
+		$this->view->set('title', 'Simpleblog');
 		$content = $this->view->render('articles.php');
 		$this->response->setContent($content);
 		$this->response->send();

@@ -46,7 +46,6 @@ class LoginController extends BaseController
 		$user = User::findByUsername($this->connection, $this->request->post('username'));
 		if (!$user) {
 			$this->view->set('loginError', 'Invalid Username or Password');
-			//$this->response->setContent($loginError = 'Invalid Username or Password');
 			$this->response->setContent($this->indexAction());
 			$this->response->send();
 		}

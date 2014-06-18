@@ -31,7 +31,8 @@ class Response
 	 */
 	private static $statusCodes = array(
 		200 => '200 Ok',
-		404 => '404 Not Found'
+		404 => 'HTTP/1.0 404 Not Found',
+		500 => 'HTTP/1.0 500 Internal Server Error'
 	);
 	
 	/**
@@ -66,7 +67,7 @@ class Response
 	 */
 	public function setStatus($status)
 	{
-		$this->$status = $status;
+		$this->status = $status;
 		return $this;
 	}
 
@@ -90,7 +91,7 @@ class Response
 	 */
 	public function send()
 	{
-		header('Status: ' . isset(static::$statusCodes[$this->status]) ? static::$statusCodes[$this->status] : $this->status);
+		header('Status: ' . isset(self::$statusCodes[$this->status]) ? self::$statusCodes[$this->status] : $this->status);
 		foreach ($this->headers as $header) {
 			header($header);
 		}
