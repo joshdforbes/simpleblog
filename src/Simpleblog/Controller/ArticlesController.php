@@ -47,7 +47,7 @@ class ArticlesController extends BaseController
 
 		if ($article) {
 			$this->view->set('article', $article);
-			$this->view->set('title', 'test 2');
+			$this->view->set('title', $article->title);
 			$content = $this->view->render('article.php');
 			$this->response->setContent($content);
 			$this->response->send();
