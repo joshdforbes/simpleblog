@@ -7,16 +7,15 @@ use Simpleblog\Classes\Auth as Auth;
 
 class AdminController extends BaseController 
 {
-	/**
-	 * calls BaseControllers constructor
-	 * creates a new Auth object and verifies that the user is an admin (this is a password protected page)
-	 * if the user is not an admin, redirects to the root
-	 * 
-	 * @param Request $request    
-	 * @param PDO     $connection
-	 * @return  void 
-	 * 
-	 */
+    /**
+     * calls BaseControllers constructor
+     * creates a new Auth object and verifies that the user is an admin (this is a password protected page)
+     * if the user is not an admin, redirects to the root
+     *
+     * @param Request $request
+     * @param \PDO|PDO $connection
+     * @return \Simpleblog\Controller\AdminController
+     */
 	public function __construct(Request $request, \PDO $connection)
 	{
 		parent::__construct($request, $connection);
