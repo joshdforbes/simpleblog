@@ -12,8 +12,8 @@
 	<h5><?= $article->date; ?></h5>
 
 	<div class="admin-buttons">
-    <button class="btn btn-primary"><a href="/admin/editArticle/<?= $article->id; ?>">EDIT</a></button>
-	<button class="btn btn-danger"><a href="/admin/deleteArticle/<?= $article->id; ?>">DELETE</a></button>
+    <a href="/admin/editArticle/<?= $article->id; ?>"><button class="btn btn-primary">>EDIT</button></a>
+	<a href="/admin/deleteArticle/<?= $article->id; ?>"><button class="btn btn-danger">DELETE</button></a>
 	</div>
 
     <p><?= $article->contentPreview; ?></p>
