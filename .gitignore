@@ -7,3 +7,5 @@ config.php
 /node_modules/
 /public/bower_components/
 /logs/
+
+.idea/workspace.xml
