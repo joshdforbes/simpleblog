@@ -1,7 +1,6 @@
 <?php
 
 namespace Simpleblog\Controller;
-use Simpleblog\Classes\Logger;
 use Simpleblog\Model\User as User;
 use Simpleblog\Classes\Auth as Auth;
 
@@ -45,8 +44,6 @@ class LoginController extends BaseController
 	 */
 	public function loginAction()
 	{
-		Logger::log(password_hash($this->request->post('password'), PASSWORD_BCRYPT));
-
 		$user = User::findByUsername($this->connection, $this->request->post('username'));
 		if (!$user) {
 			$this->view->set('loginError', 'Invalid Username or Password');
