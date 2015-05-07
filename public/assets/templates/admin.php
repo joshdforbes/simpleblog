@@ -12,7 +12,7 @@
 	<h5><?= $article->date; ?></h5>
 
 	<div class="admin-buttons">
-    <a href="/admin/editArticle/<?= $article->id; ?>"><button class="btn btn-primary">>EDIT</button></a>
+    <a href="/admin/editArticle/<?= $article->id; ?>"><button class="btn btn-primary">EDIT</button></a>
 	<a href="/admin/deleteArticle/<?= $article->id; ?>"><button class="btn btn-danger">DELETE</button></a>
 	</div>
 
