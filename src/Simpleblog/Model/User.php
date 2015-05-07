@@ -39,8 +39,8 @@ class User extends Model
 	 * create a User instance from supplied data
 	 * if the data contains a $password then hash it and store
 	 * as $hashedPassword
-	 * 
-	 * @param PDO   $connection
+	 *
+	 * @param \PDO|PDO $connection
 	 * @param array $data info required for User instance
 	 */
 	public function __construct(\PDO $connection, array $data)
@@ -57,10 +57,9 @@ class User extends Model
 
 	/**
 	 * insert a new User into the database
-	 * 
-	 * @return true|false indicates whether User was successfully inserted
+	 * @return false|true indicates whether User was successfully inserted
 	 *
-	 * @throws Exception if User fails to insert - routes to errorController
+	 * @throws \Exception if User fails to insert - routes to errorController
 	 */
 	public function insert()
 	{
@@ -84,10 +83,11 @@ class User extends Model
 
 	/**
 	 * allows Users to be searched by username instead of id
-	 * 
-	 * @param  PDO    $connection
+	 *
+	 * @param \PDO|PDO $connection
 	 * @param  string $username
-	 * @return User|false 	new User instance or false
+	 * @return false|User new User instance or false
+	 * @throws \Exception
 	 */
 	public static function findByUsername(\PDO $connection, $username)
 	{
@@ -124,11 +124,10 @@ class User extends Model
 	}
 
 	/**
-	 * updates info for an User that already exsists in the database
-	 * 
-	 * @return PDOStatement|false indicates whether User was successfully updated
+	 * updates info for an User that already exists in the database
+	 * @return false|PDOStatement indicates whether User was successfully updated
 	 *
-	 * @throws Exception if User fails to update - routes to errorController
+	 * @throws \Exception if User fails to update - routes to errorController
 	 */
 	public function update()
 	{
@@ -158,9 +157,9 @@ class User extends Model
 	}
 
 	/**
-	 * getter for $privledge
+	 * getter for $privilege
 	 * 
-	 * @return string indicates a users privledge level (admin or user)
+	 * @return string indicates a users privilege level (admin or user)
 	 */
 	public function getPrivledge()
 	{

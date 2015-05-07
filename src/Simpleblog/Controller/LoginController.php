@@ -6,11 +6,12 @@ use Simpleblog\Classes\Auth as Auth;
 
 class LoginController extends BaseController
 {
+
 	/**
 	 * calls BaseController constructor
-	 * 
-	 * @param Request $request    
-	 * @param PDO     $connection
+	 *
+	 * @param Request $request
+	 * @param \PDO|PDO $connection
 	 */
 	public function __construct(Request $request, \PDO $connection)
 	{

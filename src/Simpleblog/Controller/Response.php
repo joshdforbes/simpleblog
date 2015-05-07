@@ -51,8 +51,9 @@ class Response
 
 	/**
 	 * set the content
-	 * 
+	 *
 	 * @param string $content
+	 * @return $this
 	 */
 	public function setContent($content)
 	{
@@ -62,8 +63,9 @@ class Response
 
 	/**
 	 * set the status
-	 * 
+	 *
 	 * @param integer $status
+	 * @return $this
 	 */
 	public function setStatus($status)
 	{
@@ -73,8 +75,9 @@ class Response
 
 	/**
 	 * add a header to the header array
-	 * 
+	 *
 	 * @param string $header a single header to be added to the array
+	 * @return $this
 	 */
 	public function addHeader($header)
 	{

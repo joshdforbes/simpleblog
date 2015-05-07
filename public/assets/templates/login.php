@@ -1,9 +1,8 @@
-
 <?php if(isset($this->data['loginError'])): ?>
 	<div class="alert alert-warning text-center">
 		<strong><?= $this->data['loginError']; ?></strong>
-	</div> 
-<? endif; ?>
+	</div>
+<?php endif; ?>
 
 <form action="/login/login" method="post" class="form-signin">
 	<h2 class="form-heading">Please sign in</h2>
@@ -11,5 +10,3 @@
 	<input type="password" class="form-control" name="password" placeholder="Password" required>
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
-
-

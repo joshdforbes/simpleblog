@@ -64,14 +64,14 @@ abstract class Model
 
 	/**
 	 * searches database and returns all instances of child Model
-	 * 
-	 * @param  PDO     $connection
-	 * @param  string  $orderBy defaults to date DESC
+	 *
+	 * @param \PDO|PDO $connection
+	 * @param  string $orderBy defaults to date DESC
 	 * @param  integer $starting indicates where to start returning records, defaults to first record
 	 * @param  integer $ending indicates where to stop returning records, defaults to five
-	 * @return Model|false returns an array of Model instances or false
+	 * @return false|Model returns an array of Model instances or false
 	 *
-	 * @throws Exception routes to errorController calling databaseErrorAction
+	 * @throws \Exception routes to errorController calling databaseErrorAction
 	 */
 	public static function findAll(\PDO $connection, $orderBy = 'date DESC', $starting = 0, $ending = 5)
 	{
@@ -92,7 +92,6 @@ abstract class Model
 		} catch (\PDOException $e) {
 			Logger::log($e->getMessage());
 			Throw new \Exception('databaseError');
-			return false;
 		}
 	}
 
@@ -128,9 +127,8 @@ abstract class Model
 
 	/**
 	 * removes this instance of the Model from the database
-	 * @return true|false 
-	 *
-	 * @throws Exception routes to errorController calling databaseErrorAction
+	 * @return false|true
+	 * @throws \Exception routes to errorController calling databaseErrorAction
 	 */
 	public function delete()
 	{
