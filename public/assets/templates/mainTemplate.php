@@ -19,7 +19,7 @@
         <h1><a href="/">SimpleBlog</a></h1>
     </div>
 
-	<?php require($templatePath); ?>
+    <?php require($templatePath); ?>
 
 
     <script src="../../bower_components/jquery/dist/jquery.min.js"></script>

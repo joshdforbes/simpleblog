@@ -17,7 +17,7 @@
 	</div>
 
     <p><?= $article->contentPreview; ?></p>
-    <a href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</p>
+    <a href="/articles/article/<?= $article->id; ?>" class="read-more-link">Read the rest of this entry »</a>
 
 	</article>
 <?php endforeach; ?>
